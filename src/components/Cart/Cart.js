@@ -2,8 +2,8 @@ import React from 'react';
 
 const Cart = (props) => {
     const cart = props.cart;
-    console.log(cart);
-    const total = cart.reduce((total, prd) => total+prd.price , 0);
+    // console.log(cart);
+    const total = cart.reduce((total, prd) => total+prd.price*prd.quantity || 1, 0);
     // let total = 0;
     // for(let i=0;i<cart.length;i++){
     //     const product = cart[i];
@@ -32,12 +32,16 @@ const Cart = (props) => {
 
     return (
         <div>
-            <h3>Order Summary: </h3>
+            <h3 className='text-primary'>Order Summary: </h3>
             <p>Items Ordered: {cart.length}</p>
             <p>Product price: {formatNumber(total)}</p>
             <p>Shipping cost: {shipping}</p>
             <p>Tax + VAT: {formatNumber(tax)}</p>
             <p>Total price: {formatNumber(grandTotal)}</p>
+            <br/>
+            {
+                props.children
+            }
         </div>
     );
 };
